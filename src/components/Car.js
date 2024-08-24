@@ -3,23 +3,13 @@ import { reducer, initialState } from "./TaskReducer";
 import { Dashboard } from "./Dashboard";
 
 
-let renders = 0
-
 const Car = () => {
-  const render = ++renders
-  const [ value, setValue ] = useState("initialValue")
-
-
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
     started,
     speed,
-    distance,
-    setBy,
-    called
+    distance
   } = state
-
-  console.log("render:", render, ", setBy:", setBy, ", called:", called);
 
   const toggleCar = () => {
     if (started) {
@@ -62,20 +52,16 @@ const Car = () => {
     : "Turn Engine On"
 
 
-  const watchCar = setBy => {
-    // console.log(`watchCar(${setBy})`)
-
+  const watchCar = () => {
     dispatch({
-      type: "WATCH_CAR",
-      payload: setBy
+      type: "WATCH_CAR"
     })
   }
 
   const startWatching = () => {
-    const interval = setInterval(watchCar, 1000, render)
+    const interval = setInterval(watchCar, 100)
 
     return () => {
-      console.log(`Cleaning up startWatching (render: ${render})`)
       clearInterval(interval)
     }
   }

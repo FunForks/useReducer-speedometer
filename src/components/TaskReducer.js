@@ -32,28 +32,31 @@ function engineStop(state, payload) {
 }
 
 function accelerate(state, payload) {
-    const speed = Math.max(state.speed + 5, 0);
-    const distance = state.distance + 0.1;
+    const speed = Math.min(state.speed + 5, 200); // set max speed
 
-    return { ...state, speed, distance }
+    return { ...state, speed }
 }
 
 function brake(state, payload) {
     const speed = Math.max(state.speed - 5, 0);
-    const distance = state.distance - 0.1;
 
-    return { ...state, speed, distance }
+    return { ...state, speed }
 }
 
-function watchCar(state, setBy) {
-    const called = state.called + 1;
-    return { ...state, setBy, called }
+function watchCar(state) {
+    // 1 hour = 60 minutes
+    // 1 minute = 60 seconds
+    // 1 hour = 60 * 60 = 3600 seconds
+    // watchCar() is triggered by a setInterval call every 100ms
+    // This is 10 times every second = 36000 times per hour
+    // 1 km/h = 1/36000 km every 100 ms
+    const distance = state.distance + state.speed/36000
+    return { ...state, distance }
 }
 
 
 export const initialState = {
       started: false,
       speed: 0,
-      distance: 0,
-      called: 0
+      distance: 0
 };
