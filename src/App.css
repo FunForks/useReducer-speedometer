@@ -1,0 +1,21 @@
+body {
+  background-image: url("race.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.car {
+  background-color: white;
+}
