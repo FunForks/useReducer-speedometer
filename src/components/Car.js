@@ -1,15 +1,25 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import { reducer, initialState } from "./TaskReducer";
 import { Dashboard } from "./Dashboard";
 
 
+let renders = 0
+
 const Car = () => {
+  const render = ++renders
+  const [ value, setValue ] = useState("initialValue")
+
+
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
     started,
     speed,
-    distance
-  } = state  
+    distance,
+    setBy,
+    called
+  } = state
+
+  console.log("render:", render, ", setBy:", setBy, ", called:", called);
 
   const toggleCar = () => {
     if (started) {
@@ -50,6 +60,27 @@ const Car = () => {
   const toggleText = started
     ? "Turn Engine Off"
     : "Turn Engine On"
+
+
+  const watchCar = setBy => {
+    // console.log(`watchCar(${setBy})`)
+
+    dispatch({
+      type: "WATCH_CAR",
+      payload: setBy
+    })
+  }
+
+  const startWatching = () => {
+    const interval = setInterval(watchCar, 1000, render)
+
+    return () => {
+      console.log(`Cleaning up startWatching (render: ${render})`)
+      clearInterval(interval)
+    }
+  }
+
+  useEffect(startWatching, [])
 
   return (
     <div className="car">
