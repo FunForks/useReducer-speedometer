@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/useReducer-speedometer/static/css/main.fe2cc9cb.css",
+    "main.js": "/useReducer-speedometer/static/js/main.3598c3f3.js",
+    "static/media/race.jpg": "/useReducer-speedometer/static/media/race.e8f3d70ca4a791537c14.jpg",
+    "index.html": "/useReducer-speedometer/index.html",
+    "main.fe2cc9cb.css.map": "/useReducer-speedometer/static/css/main.fe2cc9cb.css.map",
+    "main.3598c3f3.js.map": "/useReducer-speedometer/static/js/main.3598c3f3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fe2cc9cb.css",
+    "static/js/main.3598c3f3.js"
+  ]
+}
