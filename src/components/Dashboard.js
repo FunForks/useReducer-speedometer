@@ -4,9 +4,8 @@ import ReactSpeedometer from "react-d3-speedometer";
 export const Dashboard = (props) => {
   const {
     speed,
-    accelerate,
-    brake,
-    travel,
+    changeSpeed,
+    delta,
     buttonStyle
   } = props
 
@@ -25,16 +24,17 @@ export const Dashboard = (props) => {
       <ReactSpeedometer { ...speedometerSettings } />
       <p>Car status: Engine on</p>
       <p>Current speed: {speed} km/h</p>
-      <p>Distance travelled: {travel}</p>
       <button
-        onClick={accelerate}
+        data-change={delta}   // add a data- attribute
+        onClick={changeSpeed} // change the handler
         style={buttonStyle}
         disabled={speed===200}
       >
         Accelerate
       </button>
       <button
-        onClick={brake}
+        data-change={-delta}  // add a data- attribute
+        onClick={changeSpeed} // change the handler
         style={buttonStyle}
       >
         Brake

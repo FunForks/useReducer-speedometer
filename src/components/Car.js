@@ -12,22 +12,14 @@ const Car = () => {
   } = state
 
   const toggleCar = () => {
-    if (started) {
-      dispatch({ type: "ENGINE_STOP" });
-    } else {
-      dispatch({ type: "ENGINE_ON" });
-    }
+    dispatch({ type: "TOGGLE_STARTED" });
   };
 
-  const accelerate = () => {
+  const changeSpeed = ({target}) => {
+    const payload = Number(target.dataset.change)
     dispatch({
-      type: "ACCELERATE"
-    })
-  }
-
-  const brake = () => {
-    dispatch({
-      type: "BRAKE"
+      type: "CHANGE_SPEED",
+      payload
     })
   }
 
@@ -38,9 +30,8 @@ const Car = () => {
 
   const dashboardProps = {
     speed,
-    accelerate,
-    brake,
-    travel,
+    changeSpeed,
+    delta: 5,
     buttonStyle
   }
   const display = started

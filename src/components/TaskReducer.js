@@ -1,21 +1,15 @@
 export function reducer(state, action) {
     const { type, payload } = action
 
-    switch(type){
-        case "ENGINE_ON":{
-            return engineOn(state, payload);
-        }
-        case "ENGINE_STOP":{
-            return engineStop(state, payload);
-        }
-        case "ACCELERATE":{
-            return accelerate(state, payload);
-        }
-        case "BRAKE":
-            return brake(state, payload);
+    switch(type) {
+        case "TOGGLE_STARTED":
+            return toggleStarted(state);
+
+        case "CHANGE_SPEED":
+            return changeSpeed(state, payload);
         
         case "WATCH_CAR":
-            return watchCar(state, payload);
+            return watchCar(state);
 
         default:
             return state;
@@ -23,22 +17,18 @@ export function reducer(state, action) {
 }
 
 
-function engineOn(state, payload) {
-    return { ...state, started: true };
+function toggleStarted(state) {
+    const started = !state.started
+    return { ...state, started };
 }
 
-function engineStop(state, payload) {
-    return { ...state, started: false, speed: 0 };
-}
-
-function accelerate(state, payload) {
-    const speed = Math.min(state.speed + 5, 200); // set max speed
-
-    return { ...state, speed }
-}
-
-function brake(state, payload) {
-    const speed = Math.max(state.speed - 5, 0);
+function changeSpeed(state, change) {
+    const speed = Math.max(0, // can't go below 0
+        Math.min(
+            state.speed + change,
+            200               // can't go above 200
+        )
+    );
 
     return { ...state, speed }
 }
