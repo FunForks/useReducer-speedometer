@@ -29,6 +29,7 @@ export const Dashboard = (props) => {
       <button
         onClick={accelerate}
         style={buttonStyle}
+        disabled={speed===200}
       >
         Accelerate
       </button>

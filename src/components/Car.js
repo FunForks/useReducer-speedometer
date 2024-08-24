@@ -74,22 +74,9 @@ const Car = () => {
       <p>Distance Travelled: {travel}</p>
       <button
         onClick={toggleCar}
+        disabled={speed > 0} // new line
       >
         {toggleText}
-      </button>
-      <button
-        onClick={accelerate}
-        disabled={!started}
-        style={buttonStyle}
-      >
-        Accelerate
-      </button>
-      <button
-        onClick={brake}
-        disabled={!started}
-        style={buttonStyle}
-      >
-        Brake
       </button>
     </div>
   );
