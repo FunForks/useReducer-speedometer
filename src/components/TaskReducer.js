@@ -1,35 +1,49 @@
-import React from "react";
+export function reducer(state, action) {
+    const { type, payload } = action
 
-
-export function reducer(state,action){
-    switch(action.type){
+    switch(type){
         case "ENGINE_ON":{
-            return{ ...state, started:true};
+            return engineOn(state, payload);
         }
         case "ENGINE_STOP":{
-            return{...state,started:false,speed:0}
+            return engineStop(state, payload);
         }
         case "ACCELERATE":{
-           return{...state,
-            speed:Math.max(state.speed +5,0),
-            distance: state.distance + 0.1
-           }
+            return accelerate(state, payload);
         }
         case "BRAKE":
-            {
-                return{...state,
-                 speed:Math.max(state.speed  - 5,0),
-                 distance: state.distance - 0.1
-                }
-             }
-        
+            return brake(state, payload); 
         default:
             return state;
     }
 }
 
- export  const initialState = {
+
+function engineOn(state) {
+    return { ...state, started: true };
+}
+
+function engineStop(state) {
+    return { ...state, started: false, speed: 0 };
+}
+
+function accelerate(state) {
+    const speed = Math.max(state.speed + 5, 0);
+    const distance = state.distance + 0.1;
+
+    return { ...state, speed, distance }
+}
+
+function brake(state) {
+    const speed = Math.max(state.speed - 5, 0);
+    const distance = state.distance - 0.1;
+
+    return { ...state, speed, distance }
+}
+
+
+ export const initialState = {
       started: false,
-      speed:0,
-      distance:0
+      speed: 0,
+      distance: 0
     };
