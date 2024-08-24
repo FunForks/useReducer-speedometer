@@ -12,7 +12,11 @@ export function reducer(state, action) {
             return accelerate(state, payload);
         }
         case "BRAKE":
-            return brake(state, payload); 
+            return brake(state, payload);
+        
+        case "WATCH_CAR":
+            return watchCar(state, payload);
+
         default:
             return state;
     }
@@ -41,9 +45,15 @@ function brake(state, payload) {
     return { ...state, speed, distance }
 }
 
+function watchCar(state, setBy) {
+    const called = state.called + 1;
+    return { ...state, setBy, called }
+}
 
- export const initialState = {
+
+export const initialState = {
       started: false,
       speed: 0,
-      distance: 0
-    };
+      distance: 0,
+      called: 0
+};
